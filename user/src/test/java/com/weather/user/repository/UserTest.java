@@ -43,10 +43,10 @@ public class UserTest {
     @Test
     void insertTestUser() {
         User user = User.builder()
-                .email("ryu@test.com")
+                .email("go@test.com")
                 .password(passwordEncoder.encode("1234"))
-                .name("류준열")
-                .nickname("류준열")
+                .name("고윤정")
+                .nickname("goyounjung")
                 .fromSocial(false)
                 .status(true)
                 .build();

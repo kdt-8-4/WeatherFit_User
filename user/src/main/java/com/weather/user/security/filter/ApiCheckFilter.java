@@ -25,34 +25,33 @@ public class ApiCheckFilter extends OncePerRequestFilter {
         this.pattern = pattern;
         this.jwtUtil = jwtUtil;
     }
+
     @Override
     public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
         throws ServletException, IOException {
         log.info("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
 
-        boolean headerCheck = antPathMatcher.match(pattern, request.getRequestURI());
-        log.info("headerCheck: " + headerCheck);
+        boolean apiUriCheck = antPathMatcher.match(pattern, request.getRequestURI());
+        log.info("apiUriCheck: " + apiUriCheck);
 
-        if(headerCheck) {
+        if(apiUriCheck) {
             log.info("ApiCheckFilter..............................................");
 
-//            boolean checkHeader = checkAuthHeader(request);
-//
-//            if(checkHeader) {
-//                filterChain.doFilter(request, response);
-//            }
-//            else {
-//                response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-//                response.setContentType("application/json;charset=utf-8");
-//                JSONObject json = new JSONObject();
-//                String message = "FAIL CHECK API TOKEN";
-//                json.put("code", "403");
-//                json.put("message", message);
-//
-//                PrintWriter out = response.getWriter();
-//                out.print(json);
-//            }
-//            return;
+            boolean checkAuthHeader = checkAuthHeader(request);
+
+            if(checkAuthHeader) {
+                filterChain.doFilter(request, response);
+            } else  {
+                response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                response.setContentType("application/json;charset=utf-8");
+                JSONObject json = new JSONObject();
+                String message = "FAIL CHECK API TOKEN";
+                json.put("code", "403");
+                json.put("message", message);
+
+                PrintWriter out = response.getWriter();
+                out.print(json);
+            }
         }
 
         filterChain.doFilter(request, response);

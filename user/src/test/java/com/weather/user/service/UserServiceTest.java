@@ -15,8 +15,6 @@ public class UserServiceTest {
     @Autowired
     private UserService userService;
     @Autowired
-    private UserRepository userRepository;
-    @Autowired
     PasswordEncoder passwordEncoder;
 
     @Test

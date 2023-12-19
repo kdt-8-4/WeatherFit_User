@@ -30,11 +30,8 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http.authorizeHttpRequests(auth -> auth.requestMatchers("/**").permitAll());
-        http.formLogin(login -> login.loginPage("https://weatherfit-frontend.vercel.app/login").successHandler(loginSuccessHandler()));
-        http.oauth2Login(login -> login.loginPage("https://weatherfit-frontend.vercel.app/login").successHandler(loginSuccessHandler()));
         http.csrf((csrf) -> csrf.disable());
         http.logout(Customizer.withDefaults());
-        http.rememberMe(rememberMe -> rememberMe.tokenValiditySeconds(60*60*24*60).userDetailsService(authUserDetailsService));
 
         AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
         authenticationManagerBuilder.userDetailsService(authUserDetailsService).passwordEncoder(passwordEncoder());
@@ -68,7 +65,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    public ApiLoginFilter apiLoginFilter(AuthenticationManager authenticationManager) throws Exception{
+    public ApiLoginFilter apiLoginFilter(AuthenticationManager authenticationManager) throws Exception {
         ApiLoginFilter apiLoginFilter = new ApiLoginFilter("/login/api");
         apiLoginFilter.setAuthenticationManager(authenticationManager);
         apiLoginFilter.setAuthenticationSuccessHandler(loginSuccessHandler());
