@@ -90,7 +90,7 @@ public class UserServiceImpl implements UserService {
         } else {
             User user = User.builder()
                     .email(email)
-                    .password(passwordEncoder.encode("1234"))
+                    .password(passwordEncoder.encode("googleSocial")) // social pw not null
                     .image(image)
                     .fromSocial(true)
                     .status(true)

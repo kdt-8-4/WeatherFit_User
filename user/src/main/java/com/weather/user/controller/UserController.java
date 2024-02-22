@@ -23,7 +23,7 @@ public class UserController {
     @PostMapping("/login/google")
     public ResponseEntity<UserDTO> google(@RequestBody GoogleUserDTO googleUserDTO) throws Exception {
         log.info(" ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ google controller ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
-        log.info("googleUserDTO: " + googleUserDTO);
+        log.info("googleUserDTO: " + googleUserDTO);  // for Debugging
 
         UserDTO result = userService.googleUserCheck(googleUserDTO);
 
