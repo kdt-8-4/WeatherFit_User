@@ -53,9 +53,11 @@ public class ApiCheckFilter extends OncePerRequestFilter {
 
                 PrintWriter out = response.getWriter();
                 out.print(json);
-
-                return;
             }
+        }
+        else {
+            log.info("api check filter done");
+            filterChain.doFilter(request, response);
         }
     }
 
