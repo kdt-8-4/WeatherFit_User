@@ -79,13 +79,14 @@ public class UserController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-
     @PostMapping("/api/profile")
     public ResponseEntity<UserDTO> profile(@RequestBody UserDTO userDTO) {
         log.info(" ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ profile controller ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
         log.info("userDTO: " + userDTO);
 
         UserDTO result = userService.profile(userDTO.getEmail());
+
+        log.info("result: " + result);
 
         return new ResponseEntity<>(result, HttpStatus.OK);
     }

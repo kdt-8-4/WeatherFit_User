@@ -106,7 +106,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO googleUserAdditional(UserDTO userDTO) throws Exception{
-        log.info("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
+        log.info("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
         Optional<User> optionalUser = userRepository.findByEmail(userDTO.getEmail(), true);
 
         if(optionalUser.isPresent()) {
