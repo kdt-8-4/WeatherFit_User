@@ -40,8 +40,10 @@ public class ApiCheckFilter extends OncePerRequestFilter {
             boolean checkAuthHeader = checkAuthHeader(request);
 
             if(checkAuthHeader) {
+                log.info("api check success");
                 filterChain.doFilter(request, response);
             } else  {
+                log.info("api check fail");
                 response.setStatus(HttpServletResponse.SC_FORBIDDEN);
                 response.setContentType("application/json;charset=utf-8");
                 JSONObject json = new JSONObject();
@@ -53,8 +55,6 @@ public class ApiCheckFilter extends OncePerRequestFilter {
                 out.print(json);
             }
         }
-
-        filterChain.doFilter(request, response);
     }
 
     private boolean checkAuthHeader(HttpServletRequest request) {
