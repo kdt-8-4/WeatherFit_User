@@ -143,4 +143,15 @@ public class UserController {
 
         return new ResponseEntity(result, HttpStatus.OK);
     }
+
+    @PostMapping("/simpleuserinfo")
+    public ResponseEntity<UserDTO> simpleUserInfoByNickname(@RequestBody UserDTO userDTO) {
+        log.info(" ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ simpleUserInfoByNickname controller ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
+        log.info("nickname: " + userDTO.getNickname());
+
+        UserDTO result = userService.simpleUserInfoByNickname(userDTO.getNickname());
+
+        return new ResponseEntity(result, HttpStatus.OK);
+    }
+
 }

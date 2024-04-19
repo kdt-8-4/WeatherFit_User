@@ -243,4 +243,27 @@ public class UserServiceImpl implements UserService {
         UserDTO result = entityToDTO(user);
         return result;
     }
+
+    @Override
+    public UserDTO simpleUserInfoByNickname(String nickname) {
+        Optional<User> optionalUser = userRepository.findByNickname(nickname);
+        log.info("optionalUser: " + optionalUser);
+
+        if(optionalUser.isEmpty()) {
+            throw new Error("존재하지 않는 유저입니다.");
+        }
+        User user = optionalUser.get();
+
+        if(!user.isStatus()) {
+            throw new Error("탈퇴 대기중인 유저입니다.");
+        }
+
+        UserDTO result = UserDTO.builder()
+                .name(user.getName())
+                .nickname(user.getNickname())
+                .image(user.getImage())
+                .email(user.getEmail()).build();
+
+        return result;
+    }
 }

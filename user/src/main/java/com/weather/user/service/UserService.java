@@ -31,7 +31,9 @@ public interface UserService {
 
     void remove(String email);
 
-    public UserDTO userInfoByNickname(String nickname);
+    UserDTO userInfoByNickname(String nickname);
+
+    UserDTO simpleUserInfoByNickname(String nickname);
 
     default User dtoToEntity(UserDTO userDTO) {
         User user = User.builder()
